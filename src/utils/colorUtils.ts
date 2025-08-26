@@ -196,7 +196,7 @@ export const generateBetterSecondary = (primaryHex: string): string => {
 
 // Generate accessible text colors
 export const generateTextColors = (backgroundHex: string): { primary: string, secondary: string } => {
-  const [h, s, l] = hexToHsl(backgroundHex)
+  const [, , l] = hexToHsl(backgroundHex)
   
   if (l > 50) {
     // Light background - use dark text

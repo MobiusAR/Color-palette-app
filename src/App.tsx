@@ -21,26 +21,27 @@ function App() {
   const generateDynamicTheme = (hexColor: string) => {
     const [h, s, l] = hexToHsl(hexColor)
     
-    // Create complementary and analogous colors for the theme
-    const complementary = hslToHex((h + 180) % 360, Math.min(100, s + 10), Math.max(20, l - 10))
-    const analogous1 = hslToHex((h + 30) % 360, Math.min(100, s + 5), Math.max(30, l - 5))
-    const analogous2 = hslToHex((h - 30 + 360) % 360, Math.min(100, s + 5), Math.max(30, l - 5))
-    
-    // Generate neutral colors based on the primary color
-    const neutralLight = hslToHex(h, Math.max(0, s - 40), Math.min(95, l + 30))
-    const neutralDark = hslToHex(h, Math.max(0, s - 30), Math.max(15, l - 40))
+    // Create a harmonious color scheme
+    const primaryDark = hslToHex(h, Math.min(100, s + 20), Math.max(0, l - 30))
+    const primaryLight = hslToHex(h, Math.max(0, s - 20), Math.min(100, l + 30))
+    const secondary = hslToHex((h + 30) % 360, Math.max(0, s - 30), Math.max(40, l - 10))
+    const accent = hslToHex((h + 180) % 360, Math.min(100, s + 10), Math.max(30, l - 10))
+    const background = hslToHex(h, Math.max(0, s - 60), 95)
+    const surface = hslToHex(h, Math.max(0, s - 40), 90)
+    const textPrimary = l > 50 ? '#000000' : '#ffffff'
+    const textSecondary = l > 50 ? '#333333' : '#e0e0e0'
     
     return {
       '--primary-color': hexColor,
-      '--primary-dark': hslToHex(h, Math.min(100, s + 20), Math.max(20, l - 20)),
-      '--primary-light': hslToHex(h, Math.max(0, s - 10), Math.min(95, l + 20)),
-      '--secondary-color': complementary,
-      '--accent-color': analogous1,
-      '--background': neutralLight,
-      '--background-secondary': hslToHex(h, Math.max(0, s - 50), Math.min(98, l + 35)),
-      '--text-primary': neutralDark,
-      '--text-secondary': hslToHex(h, Math.max(0, s - 25), Math.max(25, l - 25)),
-      '--border-color': hslToHex(h, Math.max(0, s - 35), Math.max(20, l - 20)),
+      '--primary-dark': primaryDark,
+      '--primary-light': primaryLight,
+      '--secondary-color': secondary,
+      '--accent-color': accent,
+      '--background-color': background,
+      '--surface-color': surface,
+      '--text-primary': textPrimary,
+      '--text-secondary': textSecondary,
+      '--border-color': hslToHex(h, Math.max(0, s - 50), 85)
     }
   }
 

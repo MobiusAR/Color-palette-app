@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ColorPaletteData } from '../types'
 import { getContrastRatio, isAccessible } from '../utils/colorUtils'
 
@@ -7,13 +7,11 @@ interface ColorPaletteProps {
 }
 
 const ColorPalette: React.FC<ColorPaletteProps> = ({ palette }) => {
-  const [copiedColor, setCopiedColor] = useState<string | null>(null)
-
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
-      setCopiedColor(text)
-      setTimeout(() => setCopiedColor(null), 2000)
+      // Could add a toast notification here in the future
+      console.log('Color copied to clipboard:', text)
     } catch (err) {
       console.error('Failed to copy color:', err)
     }
